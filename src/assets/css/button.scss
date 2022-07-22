@@ -1,0 +1,55 @@
+.lf-button{
+	box-sizing: border-box;
+	position: relative;
+	color: var(--primary-button-font-color);
+	background: var(--primary-button-background-color);
+	display: inline-block;
+	cursor: pointer;
+	text-align: center;
+	padding: 5px 15px;
+	border-radius: 4px;
+	user-select: none;
+
+	.lf-loading{
+		margin-right: 0.5em;
+	}
+		.anticon-spin{		
+			vertical-align: -0.1em;
+			animation: rotateloading 1s infinite linear;
+		}
+
+	&:hover{
+		background: var(--primary-button-hover-color);
+	}
+	&::after{
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		opacity: 0;
+		box-shadow: 0 0 0 6px var(--primary-button-shadow);
+		transition: .3s;
+	}
+	&:active::after{
+		box-shadow: none;
+		opacity: 1;
+		transition: 0s; /*取消过渡*/
+	}
+}
+
+@-webkit-keyframes rotateloading{
+	0%{
+		transform: rotateZ(0deg);
+	}
+	100%{
+		transform: rotateZ(360deg);
+	}
+}
+@keyframes rotateloading{
+	0%{
+		transform: rotateZ(0deg);
+	}
+	100%{
+		transform: rotateZ(360deg);
+	}
+}

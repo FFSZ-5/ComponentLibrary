@@ -2,9 +2,10 @@
  * @FilePath: \ComponentLibrary\src\components\index.js
  * @Version: 2.0
  * @LastEditors: lhl
- * @LastEditTime: 2022-07-12 16:57:10
+ * @LastEditTime: 2022-07-20 09:53:33
  * @Description:批量注册组件
  */
+import '../assets/css/index.scss'
 const files = require.context('@/components', true, /\.vue$/)
 const components = {}
 files.keys().forEach((key) => {
@@ -23,7 +24,8 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 const lfButton = components.Button
 const lfTable = components.Table
-export { install, lfButton, lfTable }
+const lfCollapse = components.Collapse
+export { install, lfButton, lfTable, lfCollapse }
 export default {
   install,
   components

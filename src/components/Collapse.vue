@@ -2,7 +2,7 @@
  * @FilePath: \ComponentLibrary\src\components\Collapse.vue
  * @Version: 2.0
  * @LastEditors: lhl
- * @LastEditTime: 2022-07-15 17:52:36
+ * @LastEditTime: 2022-07-22 11:06:53
  * @Description:
 -->
 <template>
@@ -36,20 +36,19 @@ export default {
     time: {
       default: 1
     },
-    maxHeight: {
+    maxheight: {
       default: 100,
-      type: Number
+      type: [Number, String]
     },
     show: {
       default: false,
       type: Boolean
     },
     value: {
-      default: () => { },
-      type: Object
+      default: () => { }
     },
     name: {
-      default: 0,
+      default: 'demo1',
       required: true
     }
   },
@@ -84,16 +83,17 @@ export default {
       this.isShow = !this.isShow
       const _this = this
       const artical = document.querySelector('.lf-collapse[name="' + _this.name + '"] ' + '.lf-collapse-body-artical')
+      console.log(_this.name)
       if (this.isShow) {
         const height = artical.scrollHeight
         requestAnimationFrame(function fn () {
           artical.style.transition = 'height ' + _this.time + 's'
           artical.style.height = '0px'
-          artical.style.maxHeight = _this.maxHeight + 'px'
+          artical.style.maxHeight = _this.maxheight + 'px'
           requestAnimationFrame(function fn () {
             artical.style.height = height + 'px'
 
-            if (_this.maxHeight < height) {
+            if (_this.maxheight < height) {
               artical.style.overflowY = 'auto'
             }
           })

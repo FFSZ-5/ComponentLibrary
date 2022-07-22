@@ -1,11 +1,11 @@
 {
   "name": "vue-lfcomponents",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "description": "前端组件库",
   "author": "刘范思哲",
   "license": "MIT",
   "main": "dist/lfComponents.umd.js",
-  "style": true,
+  "style": "dist/lfComponents.css",
   "keywords": [
     "components",
     "lfcomponents",
@@ -64,7 +64,7 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "no-debugger":"off"
+      "no-debugger": "off"
     }
   },
   "browserslist": [

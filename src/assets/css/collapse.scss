@@ -1,0 +1,25 @@
+//折叠框样式
+.lf-collapse {
+	border-top: 1px solid var(--collapse-border-color);
+	border-bottom: 1px solid var(--collapse-border-color);
+  &-head {
+		cursor: pointer;
+		&-text{
+			box-sizing: border-box;
+			padding: 10px 20px;
+		}
+  }
+	&-body{
+		&-artical {
+			overflow: hidden;
+			word-wrap: break-word;
+			.artical-content{
+				padding: 5px 20px 20px 20px;
+			}
+		}
+	}
+  .unshow {
+		padding: 0;
+    height: 0;
+  }
+}
