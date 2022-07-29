@@ -2,7 +2,7 @@
  * @FilePath: \ComponentLibrary\src\components\CodeBox.vue
  * @Version: 2.0
  * @LastEditors: lhl
- * @LastEditTime: 2022-07-22 10:53:46
+ * @LastEditTime: 2022-07-29 11:17:44
  * @Description:
 -->
 <template>
@@ -16,7 +16,7 @@
       <slot name="message">{{message}}</slot>
     </div>
     <lf-collapse :name=name
-                 time=0.3
+                 :time=0.1
                  style="border:none;border-left:3px solid #f0f0f0;border-right:3px solid #f0f0f0;">
       <template slot="head">
         <slot name="option">
@@ -68,11 +68,13 @@ export default {
   components: { lfCollapse },
   props: {
     active: {
-      default: false
+      default: false,
+      type: Boolean
     },
     name: {
       default: 'demo1',
-      required: true
+      required: true,
+      type: [String, Number]
     },
     demo: {
       default: '组件实例'

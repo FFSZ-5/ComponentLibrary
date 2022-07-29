@@ -2,7 +2,7 @@
  * @FilePath: \ComponentLibrary\src\components\index.js
  * @Version: 2.0
  * @LastEditors: lhl
- * @LastEditTime: 2022-07-20 09:53:33
+ * @LastEditTime: 2022-07-29 16:13:03
  * @Description:批量注册组件
  */
 import '../assets/css/index.scss'
@@ -10,7 +10,6 @@ const files = require.context('@/components', true, /\.vue$/)
 const components = {}
 files.keys().forEach((key) => {
   files(key).default.install = (Vue) => { Vue.component(files(key).default.name, files(key).default) }
-  console.log(files(key).default)
   components[key.replace(/(\.\/|\.vue)/g, '')] = files(key).default
 })
 const install = (Vue) => {

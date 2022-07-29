@@ -2,14 +2,14 @@
  * @FilePath: \ComponentLibrary\src\components\Collapse.vue
  * @Version: 2.0
  * @LastEditors: lhl
- * @LastEditTime: 2022-07-22 11:06:53
+ * @LastEditTime: 2022-07-29 16:10:39
  * @Description:
 -->
 <template>
   <div class="lf-collapse"
        :name="name">
     <div class="lf-collapse-head"
-         @click="clickCollapse(false)">
+         @click="clickCollapse($event,false)">
       <slot name="head">
         <div class="lf-collapse-head-text">{{collapseValue.title}}</div>
       </slot>
@@ -34,10 +34,11 @@ export default {
   name: 'lfCollapse',
   props: {
     time: {
-      default: 1
+      default: 0.3,
+      type: Number
     },
     maxheight: {
-      default: 100,
+      default: '',
       type: [Number, String]
     },
     show: {
@@ -55,7 +56,8 @@ export default {
   data () {
     return {
       isShow: false, // 是否展开
-      collapseValue: { title: '123', content: '456' }// 折叠框的值
+      collapseValue: { title: '123', content: '456' }, // 折叠框的值
+      canUse: true // 点击是否可用
     }
   },
   watch: {
@@ -63,7 +65,7 @@ export default {
       handler (val) {
         this.isShow = !val
         this.$nextTick(() => {
-          this.clickCollapse(true)
+          this.clickCollapse(null, true)
         })
       },
       immediate: true
@@ -76,25 +78,36 @@ export default {
     }
   },
   methods: {
-    clickCollapse (val) {
+    clickCollapse (ele, val) {
       if (!val) {
+        this.$emit('click', { name: this.name, isActive: !this.isShow, target: ele.target })
         this.$emit('change', { name: this.name, isActive: !this.isShow })
+        if (!this.canUse) {
+          return
+        }
+      } else {
+        this.canUse = false
       }
+
       this.isShow = !this.isShow
       const _this = this
       const artical = document.querySelector('.lf-collapse[name="' + _this.name + '"] ' + '.lf-collapse-body-artical')
-      console.log(_this.name)
       if (this.isShow) {
         const height = artical.scrollHeight
         requestAnimationFrame(function fn () {
           artical.style.transition = 'height ' + _this.time + 's'
           artical.style.height = '0px'
-          artical.style.maxHeight = _this.maxheight + 'px'
+          if (_this.maxheight) {
+            artical.style.maxHeight = _this.maxheight + 'px'
+          }
           requestAnimationFrame(function fn () {
             artical.style.height = height + 'px'
-
-            if (_this.maxheight < height) {
-              artical.style.overflowY = 'auto'
+            if (_this.maxheight) {
+              if (_this.maxheight < height) {
+                artical.style.overflowY = 'auto'
+              }
+            } else {
+              artical.style.overflowY = 'hidden'
             }
           })
         })
